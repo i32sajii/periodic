@@ -1,0 +1,37 @@
+{% extends "index.html" %}
+{% load staticfiles %}
+
+{% block midblock %}
+<br><br><br><br>
+<div class="col-sm-8">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+    <div class="panel panel-default ">
+    <div class="panel-body">
+    {% if messageOk %}
+        <div class="alert alert-success">{{ messageOk }}</div>
+    {% endif %}
+    {% if messageFail %}
+        <div class="alert alert-danger">{{ messageFail }}</div>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+
+        <h2 class="form-signin-heading">Eliminar usuario</h2>
+        <h5> Esta operación no puede deshacerse </h5> <br>
+
+        {{ form.as_p }}
+
+
+
+
+        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Aceptar"><br>
+        <p><a href="/noticias/">Cancelar</a></p>
+    </form>
+    </div>
+    </div>
+    </div>
+    <div class="col-sm-3"></div>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "index.html" %}
+{% load staticfiles %}
+
+{% block midblock %}
+<div class="col-sm-8">
+<br><a href="/noticias/"><img src="{% static 'img/banner.png' %}" class="img-responsive" /></a><br>
+
+		<br><div class="panel panel-default	">
+			<div class="panel-body">
+				<p>
+					{% if seccion_lista %}
+						<ul>
+						{% for noticia in seccion_lista %}
+							<a align="left" href="/noticias/{{ noticia.id }}/"><p><h3><b>{{ noticia.name }}</b></h3></p></a>
+							<p align="left" style="font-size:85%"> Fecha: {{ noticia.fecha }} </p>
+							<p align="justify"> {{ noticia.breveDescripcion }}</p>
+						{% endfor %}
+						</ul>
+					{% else %}
+						<p><h3>No hay noticias disponibles en esta sección.</h3></p>
+					{% endif %}
+
+				</p>
+			</div>
+			</div>
+
+
+
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "index.html" %}
+{% load staticfiles %}
+
+{% block midblock %}
+<br><br><br><br>
+<div class="col-sm-8">
+<br><a href="/noticias/"><img src="{% static 'img/banner.png' %}" class="img-responsive" /></a><br>
+<div class="col-sm-3"></div>
+      <div class="col-sm-6">
+        		<br><div class="panel panel-default">
+                <p><h2 align="center"> Secciones </h2></p>
+                {% if secciones_list %}
+                <div class="panel-body">
+                {% for seccion in secciones_list %}
+                    <p><h3> {{ seccion.tipo }} </h3></p>
+                {% endfor %}
+                </div>
+                {% else %}
+                    <div class="panel-body">
+                        <h3> No hay secciones. </h3>
+                    </div>
+                {% endif %}
+          			</div>
+
+
+        </div>
+<div class="col-sm-3"></div>
+
+</div>
+
+{% endblock %}

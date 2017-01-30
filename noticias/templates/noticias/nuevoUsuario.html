@@ -1,0 +1,33 @@
+{% extends "index.html" %}
+{% load staticfiles %}
+
+{% block midblock %}
+<br><br><br>
+<div class="col-sm-8">
+<div class="col-sm-3"></div>
+<div class="col-sm-6">
+    <div class="panel panel-default ">
+    <div class="panel-body">
+    {% if messageOk %}
+        <div class="alert alert-success">{{ messageOk }}</div>
+    {% endif %}
+    {% if messageFail %}
+        <div class="alert alert-danger">{{ messageFail }}</div>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+
+        <h2 class="form-signin-heading">Formulario de registro</h2><br>
+
+        {{ form.as_p }}
+
+
+        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Enviar"><br>
+        <a href="/noticias/" role="button" class="btn btn-default" style="margin-left:10px">Cancelar</a>
+    </form>
+    </div>
+    </div>
+    </div>
+    <div class="col-sm-3"></div>
+</div>
+{% endblock %}

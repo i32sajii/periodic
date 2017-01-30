@@ -1,0 +1,138 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<title>{% block title %}SLQH{% endblock %}</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	    <link rel='shortcut icon' type='image/png' href="{% static 'sexta.png'%}" />
+
+	<style type="text/css" media="screen">
+		a:link {text-decoration:none;color:black;}
+    	a:hover {text-decoration:none;color:gray;}
+    	body {
+	    	background-image: url('{% static 'fondo.jpg' %}');
+	    	background-repeat: no-repeat;
+            background-size: 100%;
+    	}
+       	p, h2{
+    		margin-right: 20px;
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<!-- Static navbar -->
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="pull-left" href="/noticias/"><img  href="/" src="{% static 'logo.png' %}" height="60px"/></a>
+
+			</div>
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="/noticias/">Inicio</a></li>
+
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="/">Secciones <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/noticias/seccion/politicos/" >Políticos</a></li>
+							<li><a href="/noticias/seccion/musicos/" >Músicos</a></li>
+							<li><a href="/noticias/seccion/actores/" >Actores</a></li>
+							<li><a href="/noticias/seccion/tecnoFauna/" >TecnoFauna</a></li>
+							<li><a href="/noticias/seccion/colaboradores/" >Colaboradores</a></li>
+						</ul>
+					</li>
+
+					<li><a href="/contacto/">Contacto</a></li>
+
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					{% if user.is_authenticated %}
+            			{% if user.is_superuser %}
+                    <!-- con el primer if, controlamos estar autentificados,
+                    y en el segundo comprobamos si somos sudo, para mostrar el menú pertinente-->
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Gestión <span class="glyphicon glyphicon-cog"></span></a>
+						<ul class="dropdown-menu">
+							<li class="dropdown-header">Noticia</li>
+							<li><a href="/noticias/gestion/nueva-noticia/" > Añadir </a></li>
+							<li><a href="/noticias/gestion/modificar-noticia/ "> Modificar </a></li>
+							<li><a href="/noticias/gestion/eliminar-noticia/ "> Eliminar </a></li>
+							<li role="separator" class="divider"></li>
+							<li class="dropdown-header">Sección</li>
+							<li><a href="/noticias/gestion/ver-secciones/" > Ver </a></li>
+							<li><a href="/noticias/gestion/nueva-seccion/" > Añadir </a></li>
+							<li><a href="/noticias/gestion/eliminar-seccion/ "> Eliminar </a></li>
+
+						</ul>
+					</li>
+            		{% endif %}<!-- si no somo sudo, mostramos menú normal sin privilegios  -->
+            		<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Bienvenido/a {{user.username}} <span class="glyphicon glyphicon-chevron-down"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/noticias/configuracion/cambiar-clave/" > Cambiar contraseña </a></li>
+							<li><a href="/noticias/configuracion/eliminar-usuario/ "> Eliminar usuario </a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="/noticias/logout/">Desconectarse <span class="glyphicon glyphicon-log-out"></span> </a></li>
+						</ul>
+					</li>
+
+            		{% else %}<!-- no logueados, damos opcion de loggear -->
+					<li><a href="/noticias/login/">Iniciar sesión <span class="glyphicon glyphicon-log-in"></span></a></li>
+					{% endif %}
+
+				</ul>
+			</div><!--/.nav-collapse -->
+		</div>
+	</nav>
+	{% block bloques %}
+	<div class="rows">
+		{% block leftblock %}
+			<div class="col-sm-2"></div>
+		{% endblock %}
+
+		{% block midblock %}
+			<div class="col-sm-8">
+                <br><br><br>
+				<br><a href="/noticias/"><img src="{% static 'banner.jpg' %}" class="img-responsive" /></a><br>
+        		<br><div class="panel panel-default">
+          			<div class="panel-body">
+            			<h2 align="left">Bienvenido/a</h2><br>
+            			<p align="justify" >
+                            Te damos un cordial saludo a nuestro periodico basado en el exitoso programa "Se Lo Que Hicisteis de la sexta."<br><br>
+                            Si los programas del corazón te la repampinflan, aquí les sacaremos partido de la única forma posible, riendose de ellos.<br><br>
+                            Si estás interesado en reirte con nosotros y de nosotros, pilla sitio por aquí.
+							<p align="center">
+							<a href="/noticias/" role="button" class="btn btn-primary" style="margin-right:10px">Entrar</a>
+							<a href="https://www.google.es/" role="button" class="btn btn-danger" style="margin-left:10px">Salir</a>
+							</p>
+	       				    </p>
+          			</div>
+          			</div>
+
+        	</div>
+
+		{% endblock %}
+
+		{% block rightblock %}
+			<div class="col-sm-2"></div>
+		{% endblock %}
+	</div>
+	{% endblock %}
+
+
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+{% extends "index.html" %}
+{% load staticfiles %}
+
+{% block midblock %}
+
+
+<div class="col-sm-8">
+	<br><a href="/noticias/"><img src="{% static 'img/banner.png' %}" class="img-responsive" /></a><br>
+	<br><div class="panel panel-default">
+		<div class="panel-body">
+			{% if noticiaDatos %}
+			{% for elemento in noticiaDatos %}
+			<h2>{{ elemento.name }}</h2><br>
+			<p style="font-size:85%"><a href="/noticias/autores/" style="color:black" ><b> {{ elemento.autor }} </b></a> <i> | {{ elemento.fecha }} </i></p>
+			{% if imagenRuta != "" %}
+			<br><p align="center"><img src="{{ imagenRuta }}" class="img-responsive" /></p><br>
+			{% endif %}
+			<p align="justify" >
+				{{ elemento.parrafo1 }}
+			</p>
+			{% if elemento.parrafo2 != null %}
+			<p align="justify">
+				{{ elemento.parrafo2 }}
+			</p>
+			{% endif %}
+			{% if elemento.parrafo3 != null %}
+			<p align="justify">
+				{{ elemento.parrafo3 }}
+			</p>
+			{% endif %}
+			{% if elemento.parrafo4 != null %}
+			<p align="justify">
+				{{ elemento.parrafo4 }}
+			</p>
+			{% endif %}
+			{% if elemento.parrafo5 != null %}
+			<p align="justify">
+				{{ elemento.parrafo5 }}
+			</p>
+			{% endif %}
+			{% if elemento.parrafo6 != null %}
+			<p align="justify">
+				{{ elemento.parrafo6 }}
+			</p>
+			{% endif %}
+			<br>
+			<p align="left" style="font-size:90%">
+				Fuente: <i>{{ elemento.fuente }}</i>
+			</p>
+			{% endfor %}
+			{% else %}
+			<p align="center"><h2>Vaya, parece que esta noticia ya no existe...</h2></p><br>
+			{% endif %}
+			
+			</div>
+		</div>
+
+
+	</div>
+
+
+
+	{% endblock %}
